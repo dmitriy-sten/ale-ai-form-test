@@ -1,7 +1,5 @@
-import { ThanksPage } from "@/pages/thanks-page";
+import { ThanksPage } from "@/_pages/thanks-page";
 
-const Page = () => {
+export default function ThPage() {
   return <ThanksPage />;
-};
-
-export default Page;
+}
