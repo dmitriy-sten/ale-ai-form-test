@@ -1,5 +1,7 @@
 import { ThanksPage } from "@/pages/thanks-page";
 
-export default function Page() {
+const Page = () => {
   return <ThanksPage />;
-}
+};
+
+export default Page;

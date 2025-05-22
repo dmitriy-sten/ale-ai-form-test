@@ -1,6 +1,7 @@
-
 import { IndexPage } from "@/pages/index-page";
 
-export default function Home() {
+const Home = () => {
   return <IndexPage />;
-}
+};
+
+export default Home;
