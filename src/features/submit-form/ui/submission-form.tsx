@@ -22,15 +22,9 @@ export const SubmissionForm: React.FC<Props> = ({ className }) => {
   const { data, isLoading } = useCandidatesLevelsQuery();
   const { mutate, isPending } = useSubmitFormMutation();
   
-
   const handleSubmit = (data: SubmissionPortalFormSchemaType) => {
     mutate(data);
   };
-
-
-  useEffect(()=>{
-
-  },[])
 
   return (
     <FormProviderWrapper
