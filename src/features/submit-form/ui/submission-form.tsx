@@ -25,7 +25,7 @@ export const SubmissionForm: React.FC<Props> = () => {
 
   const handleSubmit = (data: SubmissionPortalFormSchemaType) => {
     mutate(data, {
-      onSuccess: (data, vars) => {
+      onSuccess: (data) => {
         toast.success("Success", {
           description: <p className="text-green-400">{data.message}</p> 
         });
