@@ -14,13 +14,16 @@ interface Props {
   isSuccess?: boolean;
 }
 
-export const FormProviderWrapper = ({
-  children,
-  onSubmit,
-}: Props) => {
+export const FormProviderWrapper = ({ children, onSubmit }: Props) => {
   const methods = useForm<SubmissionPortalFormSchemaType>({
     resolver: zodResolver(submissionPortalFormSchema),
     mode: "onSubmit",
+    defaultValues: {
+      name: "",
+      assigment_description: "",
+      email: "",
+      github_repo_url: "",
+    },
   });
 
   return (

@@ -7,6 +7,7 @@ import { FormTextArea } from "./form-textarea";
 import { Title } from "@/shared/components/title";
 import { Label } from "@/shared/components/ui/label";
 import { Card } from "@/shared/components/ui/card";
+import { useCandidatesLevelsQuery } from "../api/queries";
 
 interface Props {
   className?: string;
@@ -14,6 +15,9 @@ interface Props {
 
 export const SubmissionForm: React.FC<Props> = ({ className }) => {
   const handleSubmit = (data: SubmissionPortalFormSchemaType) => {};
+
+  const { data } = useCandidatesLevelsQuery();
+
 
   return (
     <FormProviderWrapper onSubmit={handleSubmit}>
@@ -40,10 +44,11 @@ export const SubmissionForm: React.FC<Props> = ({ className }) => {
 
         <div className="flex gap-2">
           <Label>Candidate Level*</Label>
-          
         </div>
 
         <Button type="submit">Submit</Button>
+
+        { data?.levels}
       </Card>
     </FormProviderWrapper>
   );
