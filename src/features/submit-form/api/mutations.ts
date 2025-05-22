@@ -33,21 +33,14 @@ export const useSubmitFormMutation = () => {
 
     return useMutation({
         mutationFn: sendData,
-        onSuccess: (data, vars) => {
+        onSuccess: (_, vars) => {
             setSubmitedData(vars)
-            
-            toast('Success', {
-                description: data.message
-            })
+
+
             router.push('/thank-you')
         },
 
 
-        onError: (error) => {
-            toast("Something went wrong", {
-                description: error.message
 
-            })
-        }
     })
 }

@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import { FormProviderWrapper } from "../model/form-provider";
 import { SubmissionPortalFormSchemaType } from "../model/submit-form-schema";
 import { FormInput } from "./form-input";
@@ -13,17 +13,29 @@ import { FormSelect } from "./form-select";
 import { useSubmitFormMutation } from "../api/mutations";
 import { cn } from "@/shared/lib/utils";
 import { SubmitButton } from "./submit-button";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
 }
 
-export const SubmissionForm: React.FC<Props> = ({ className }) => {
+export const SubmissionForm: React.FC<Props> = () => {
   const { data, isLoading } = useCandidatesLevelsQuery();
   const { mutate, isPending } = useSubmitFormMutation();
-  
+
   const handleSubmit = (data: SubmissionPortalFormSchemaType) => {
-    mutate(data);
+    mutate(data, {
+      onSuccess: (data, vars) => {
+        toast.success("Success", {
+          description: <p className="text-green-400">{data.message}</p> 
+        });
+      },
+
+      onError: (error) =>
+        toast.error("Something went wrong", {
+          description: <p className="text-red-400">{error.message}</p>,
+        }),
+    });
   };
 
   return (
