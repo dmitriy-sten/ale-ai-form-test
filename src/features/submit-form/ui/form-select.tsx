@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Select,
   SelectContent,
@@ -13,7 +15,6 @@ import {
   FieldValues,
   useFormContext,
 } from "react-hook-form";
-import { SubmissionPortalFormSchemaType } from "../model/submit-form-schema";
 
 type FormInputProps<T extends FieldValues> = {
   name: ControllerProps<T>["name"];
@@ -21,12 +22,15 @@ type FormInputProps<T extends FieldValues> = {
   placeholder?: string;
   options: string[] | undefined;
   className?: string;
+  isLoading?:boolean
 };
 
 export const FormSelect = <T extends FieldValues>({
   className,
   options,
   name,
+  isLoading
+  
 }: FormInputProps<T>) => {
   const { control } = useFormContext<T>();
 
@@ -36,8 +40,7 @@ export const FormSelect = <T extends FieldValues>({
       name={name}
       render={({ field, fieldState }) => (
         <div className="flex  flex-col gap-1">
-        
-          <Select value={field.value} onValueChange={field.onChange}>
+          <Select value={field.value} onValueChange={field.onChange} disabled={isLoading}>
             <SelectTrigger
               className={cn(
                 "w-[200px]",

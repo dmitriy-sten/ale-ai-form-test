@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+'use client'
+
+import React, { ReactNode, useEffect } from "react";
 import { FormProviderWrapper } from "../model/form-provider";
 import { SubmissionPortalFormSchemaType } from "../model/submit-form-schema";
 import { FormInput } from "./form-input";
-import { Button } from "@/shared/components/ui/button";
 import { FormTextArea } from "./form-textarea";
 import { Title } from "@/shared/components/title";
 import { Label } from "@/shared/components/ui/label";
@@ -17,29 +18,27 @@ interface Props {
   className?: string;
 }
 
-// toast("You submitted the following values:", {
-//     description: (
-//       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-//         <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-//       </pre>
-//     ),
-//   });
-
 export const SubmissionForm: React.FC<Props> = ({ className }) => {
-  const { data } = useCandidatesLevelsQuery();
+  const { data, isLoading } = useCandidatesLevelsQuery();
   const { mutate, isPending } = useSubmitFormMutation();
+  
 
   const handleSubmit = (data: SubmissionPortalFormSchemaType) => {
     mutate(data);
   };
+
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <FormProviderWrapper
       className="max-w-[400px] w-full"
       onSubmit={handleSubmit}
     >
-      <Card className="p-5 flex flex-col gap-5 mt-40 ">
-        <Title className="text-center mb-3">Submission Portal </Title>
+      <Card className="p-3 md:p-5   flex flex-col gap-5 mt-40 ">
+        <Title className="text-center mb-3">Assignment Submission</Title>
         <Container>
           <Label htmlFor="name">Name*</Label>
           <FormInput<SubmissionPortalFormSchemaType>
@@ -70,7 +69,7 @@ export const SubmissionForm: React.FC<Props> = ({ className }) => {
           <Label htmlFor="github_repo_url">GitHub Repository URL*</Label>
           <FormInput<SubmissionPortalFormSchemaType>
             name="github_repo_url"
-            placeholder="http://github...."
+            placeholder="https://github...."
           />
         </Container>
 
@@ -79,10 +78,11 @@ export const SubmissionForm: React.FC<Props> = ({ className }) => {
           <FormSelect<SubmissionPortalFormSchemaType>
             name="candidate_level"
             options={data?.levels}
+            isLoading={isLoading}
           />
         </Container>
 
-        <SubmitButton isPending />
+        <SubmitButton isPending={isPending} />
       </Card>
     </FormProviderWrapper>
   );

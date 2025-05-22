@@ -2,6 +2,8 @@ import { API_ROUTES } from "@/shared/api/api-routes";
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { SubmissionPortalFormSchemaType } from "../model/submit-form-schema";
+import { useRouter } from "next/navigation";
+import { useSubmittedDataStore } from "../model/store";
 
 
 interface PostResponse {
@@ -26,12 +28,21 @@ const sendData = async (payload: SubmissionPortalFormSchemaType): Promise<PostRe
 
 
 export const useSubmitFormMutation = () => {
+    const router = useRouter()
+    const { setSubmitedData } = useSubmittedDataStore()
 
     return useMutation({
         mutationFn: sendData,
-        onSuccess: (data) => toast('Success', {
-            description: data.message
-        }),
+        onSuccess: (data, vars) => {
+            setSubmitedData(vars)
+            
+            toast('Success', {
+                description: data.message
+            })
+            router.push('/thank-you')
+        },
+
+
         onError: (error) => {
             toast("Something went wrong", {
                 description: error.message
