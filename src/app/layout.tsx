@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "./(providers)/query-provider";
+import { Toaster } from "@/shared/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
           <div className="flex flex-col items-center mx-auto   max-w-[1024px] min-h-screen font-[family-name:var(--font-sans)]">
             {children}
           </div>
+          <Toaster />
         </QueryProvider>
       </body>
     </html>

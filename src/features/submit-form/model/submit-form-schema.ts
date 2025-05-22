@@ -2,13 +2,15 @@ import { z } from "zod";
 
 const required_error = 'Field is required.'
 
+const requiredString = z.string({ required_error })
 
 export const submissionPortalFormSchema = z.object({
-    name: z.string(),
-    email: z.string().email(),
-    assigment_description: z.string().min(1),
-    github_repo_url: z.string().url()
-}, { required_error, })
+    name: requiredString.min(1, 'Min 1 character'),
+    email: requiredString.email(),
+    assignment_description: requiredString.min(10),
+    github_repo_url: requiredString.url(),
+    candidate_level: requiredString
+})
 
 
 export type SubmissionPortalFormSchemaType = z.infer<typeof submissionPortalFormSchema>

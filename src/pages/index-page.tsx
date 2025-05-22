@@ -5,7 +5,7 @@ import React from "react";
 
 export const IndexPage: React.FC = () => {
   return (
-    <div>
+    <div className="w-full flex bg-red-400  justify-center">
       <SubmissionForm />
     </div>
   );
