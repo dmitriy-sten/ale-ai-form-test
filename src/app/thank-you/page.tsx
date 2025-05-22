@@ -1,3 +1,3 @@
 export default function ThanksPage() {
-  return <div></div>;
+  return <ThanksPage />;
 }

@@ -28,7 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <div className="flex flex-col items-center mx-auto   max-w-[1024px] min-h-screen font-[family-name:var(--font-sans)]">
+            {children}
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );
